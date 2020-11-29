@@ -21,12 +21,11 @@ TEMPLATES_DIR = os.path.join(BASE_DIR,'Templates')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'b*2_j!%uky83*b8gx1ed&cz5pg-c7cv38b=m6+t0dd=0(3n1b!'
-import os
 SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -83,6 +82,10 @@ DATABASES = {
     }
 }
 
+# Heroku: Update database configuration from $DATABASE_URL.
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -119,5 +122,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
+# The absolute path to the directory where collectstatic will collect static files for deployment.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# The URL to use when referring to static files (where they will be served from)
 STATIC_URL = '/static/'
