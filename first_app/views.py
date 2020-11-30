@@ -3,10 +3,10 @@ from django.http import HttpResponse
 # Create your views here.
 
 def  index(request):
-	return HttpResponse("Hello World")
+	return render(request, 'welcome.html')
 
 def  diff(request):
-	return HttpResponse("teda akkad")
+	return HttpResponse("Two Layer Inside")
 
 def  show_a(request):
 	return HttpResponse("a")
